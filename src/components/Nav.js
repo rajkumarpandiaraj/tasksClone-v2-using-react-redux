@@ -3,6 +3,8 @@ import '../assets/all.min.css';
 import logo from '../assets/logo.png';
 import '../assets/nav.css';
 import '../assets/modal.css';
+import { connect } from 'react-redux';
+import { modalHandle, orientationHandle } from '../redux/action';
 
 const focusStyle ={
     backgroundColor : '#fff',
@@ -36,13 +38,14 @@ export class Nav extends Component {
         })
     }
     render() {
+        const {modalHandle, isModalOpened, orientationHandle} = this.props
         return (
             <>
             <div className='nav'>
                 <div className='nav-container'>
                     <div className='brand'>
                         <div className='menu-icon'>
-                            <i className=' fas fa-bars' onClick={this.props.handleModalOpen}></i>
+                            <i className=' fas fa-bars' onClick={modalHandle}></i>
                         </div>
                         <img src={logo} alt='logo'/>
                         <p className='brand-name'>GoogleTasks</p>
@@ -54,7 +57,7 @@ export class Nav extends Component {
                     </form>
                     <div className='widgets'>
                         <i className='fas fa-cloud-upload-alt'  aria-hidden="true"></i>
-                        <i className='fas fa-grip-horizontal' onClick={this.props.orientationHandle}></i>
+                        <i className='fas fa-grip-horizontal' onClick={orientationHandle}></i>
                         <i className='fas fa-cog'></i>
                     </div>
                     <div className='mail-box'>
@@ -62,11 +65,22 @@ export class Nav extends Component {
                     </div>
                 </div>
             </div>
-            <div className='modal-bgc' onClick={this.props.handleModalOpen} style={this.props.isModalOpened ? {animationName : 'modalOpen'} : {animationName : 'modalClose'}}></div>
+            <div className='modal-bgc' onClick={modalHandle} style={ isModalOpened? {animationName : 'modalOpen'} : {animationName : 'modalClose'}}></div>
             </>
         )
     }
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        isModalOpened : state.isModalOpened,
+    }
+}
 
-export default Nav
+const mapDispatchToPros = dispatch =>{
+    return {
+        modalHandle : () => dispatch(modalHandle()),
+        orientationHandle : () => dispatch(orientationHandle()),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToPros)(Nav)

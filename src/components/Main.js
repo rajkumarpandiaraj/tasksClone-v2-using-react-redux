@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import '../assets/main.css';
 import Task from './Task';
+import { connect } from 'react-redux';
+import { addTaskInputValueHandler,
+        addNewTaskObjHandler } from '../redux/action'
 
 export class Main extends Component {
     constructor(props) {
@@ -16,24 +19,20 @@ export class Main extends Component {
         })
     }
     
-    render() {
-        const {tasksObj, addTaskInputValue, addTaskInputValueHandler, addNewTaskObjHandler,
-            itemInputValueHandler, addItemToItemArrHandler, completedArrItemHandler, isVertical} = this.props
+    render() {        
+        const { tasksArr, addTaskInputValue, addTaskInputValueHandler, isVertical, addNewTaskObjHandler} = this.props;
         return (
             <main className='main-area'>
                 <h2>Main Board</h2>
                 <div className='main-flex' style={isVertical? {flexDirection : "column"} : {flexDirection : "row"}}>
                     {
-                        Object.entries(tasksObj).map(([key, value])=> <Task key={key} task={value}
-                        itemInputValueHandler={(e)=> itemInputValueHandler(e, value.tasksId)}
-                        addItemToItemArrHandler={(e)=> addItemToItemArrHandler(e, value.tasksId)}
-                        completedArrItemHandler={completedArrItemHandler} isVertical={isVertical}/> )
+                        tasksArr.map((task)=> <Task key={task.tasksId} task={task}/>)
                     }
                     
                     <div className={isVertical? 'tasks tasks-column' : 'tasks'}>
-                        <form className='add-task-form add-new'>
+                        <form className='add-task-form add-new' onSubmit={(e) => {e.preventDefault(); return addNewTaskObjHandler()}}>
                             <input type='text' placeholder='Add List' value={addTaskInputValue} onChange={addTaskInputValueHandler}/>
-                            <button type='submit' onClick={addNewTaskObjHandler}><i className='fas fa-plus'></i></button>
+                            <button type='submit'><i className='fas fa-plus'></i></button>
                         </form>
                     </div>
                 </div>
@@ -42,5 +41,19 @@ export class Main extends Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        tasksArr : state.tasksArr,
+        addTaskInputValue : state.addTaskInputValue,
+        isVertical : state.isVertical,
+    }
+}
 
-export default Main
+const mapDispatchToPros = dispatch =>{
+    return {
+        addTaskInputValueHandler : (e) => dispatch(addTaskInputValueHandler(e)),
+        addNewTaskObjHandler : () => dispatch(addNewTaskObjHandler()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToPros)(Main)

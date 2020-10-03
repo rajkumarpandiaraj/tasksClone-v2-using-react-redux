@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../assets/logo.png';
 import '../assets/all.min.css';
 import '../assets/modal.css';
+import { connect } from 'react-redux';
 
 function Navmodal(props) {
     const { isModalOpened} = props
@@ -51,4 +52,10 @@ function Navmodal(props) {
     )
 }
 
-export default Navmodal
+const mapStateToProps = (state) =>{
+    return {
+        isModalOpened : state.isModalOpened,
+    }
+}
+
+export default connect(mapStateToProps)(Navmodal)
