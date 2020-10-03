@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    line-height: 1.4;
+    font-family: sans-serif;
+    background-color: #F6F8F9;
+    max-width: 100%;
+    min-width: 100vw;
+    overflow: hidden;
+    /* color: #73797D; */
+}

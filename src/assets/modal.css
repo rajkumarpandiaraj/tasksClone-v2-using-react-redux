@@ -1,0 +1,135 @@
+.modal-bgc{
+    height: 100Vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+.modal-container{
+    min-width: 400px;
+    width: 30vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index : 1;
+    background-color: #fff;
+    color: #5F6368;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+@keyframes modalClose{
+    from{
+        left : 0;
+        opacity:  1;
+    }
+    to{
+        left: -100vw;
+        opacity: 0;
+    }
+}
+
+@keyframes modalOpen{
+    from{
+        left : -100vw;
+        opacity:  0;
+    }
+    to{
+        left: 0;
+        opacity: 1;
+    }
+}
+.logo-brand{
+    display: flex;
+    height: 70px;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    flex: 1;
+}
+.logo-brand img{
+    height: 80%;
+}
+.modal-brand-name{
+    color: #5F6368;
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+}
+.board{
+    padding: 0.7rem 1.4rem;
+    flex: 1;
+    min-height: 120px;
+    max-height: 80vh;
+    overflow-y: auto;
+    list-style-type: none;
+}
+.icon{
+    font-size: 1.7rem;
+    
+}
+.board-item :hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+.main-board{
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0 1rem 0;
+}
+.main-board span, .add-board span, .premium p{
+    margin-left: 1.5rem;
+    font-size: 1.3rem;
+}
+.premium p{
+    margin-left: 1rem;
+}
+.add-board{
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+.premium{
+    flex: 4;
+}
+.premium-text{
+    display: flex;
+    padding: 0.7rem 1.4rem;
+}
+.premium-text:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+.fa-star{
+    color: #fdc001;
+}
+.task-board{
+    flex: 1;
+    padding: 0.7rem 1.4rem;
+}
+.task-board h4{
+    font-weight: normal;
+}
+.list{
+    list-style: none;
+    padding: 0;
+}
+.item{
+    margin: 0.3rem 0;
+    color: rgb(33, 68, 175);
+}
+.item:hover{
+    cursor: pointer;
+    color: rgba(33, 68, 175, 0.7);
+
+}
+@media(max-width: 570px){
+    .modal-container{
+        min-width: 300px;
+    }
+}
